@@ -1,5 +1,5 @@
 <template>
-  <h1 class="text-red-500 text-5xl my-3">Simple Template</h1>
+  <h1 class="text-red-500 text-5xl my-3">Coupon Template</h1>
   <p class="text-2xl uppercase">Ingresa la información para enviar la campaña</p>
   <form
     class="mt-10 border border-black w-[500px] bg-black p-5 rounded-sm"
@@ -40,6 +40,18 @@
       />
     </div>
 
+    <div class="flex flex-col gap-3 my-5">
+      <label for="templateName" class="text-xl">Código De Descuento</label>
+      <input
+        class="bg-zinc-950 outline-none focus:outline focus:outline-red-500 focus:placeholder:text-white"
+        type="text"
+        id="couponCode"
+        v-model="myForm.couponCode"
+        placeholder="DESCUENTO10"
+        required
+      />
+    </div>
+    
     <div class="flex flex-col gap-3 mt-5">
       <label for="phoneNumbers" class="text-xl">Telefonos</label>
       <textarea
@@ -70,6 +82,7 @@ const myForm = reactive({
   imageUrl: '',
   templateName: '',
   phoneNumbers: '',
+  couponCode: '',
 })
 
 const handleSubmit = async () => {
@@ -91,16 +104,18 @@ const handleSubmit = async () => {
     imageUrl: myForm.imageUrl,
     templateName: myForm.templateName,
     phoneNumbers: validPhoneNumbers,
+    couponCode: myForm.couponCode,
   })
 
   try {
-    const { data } = await whatsappApi.post('/send-simple-template', bodyParsed)
+    const { data } = await whatsappApi.post('/send-coupon-template', bodyParsed)
 
-    console.log({ 'Respuesta de la API': data })
-
+    console.log('Respuesta de la API: \n', JSON.stringify(data, null, 2))
+    
     Swal.fire('Plantillas Enviadas', 'Las plantillas fueron enviadas con éxito', 'success')
   } catch (error) {
     console.error({ error })
+    console.log('Respuesta de la API: \n', JSON.stringify(error, null, 2))
     Swal.fire('Ha ocurrido un error', 'Ocurrió un error al enviar las plantillas', 'error')
   }
 }

@@ -13,5 +13,10 @@ export const dashboardRoutes: RouteRecordRaw = {
       name: 'home',
       component: () => import('@/modules/dashboard/views/Home.vue'),
     },
+    {
+      path: 'coupon-template',
+      name: 'couponTemplate',
+      component: () => import('@/modules/dashboard/views/CouponTemplate.vue'),
+    },
   ],
 }

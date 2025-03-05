@@ -7,6 +7,15 @@
       >
     </h1>
 
+    <ul class="flex gap-3 justify-center items-center">
+      <li class="hover:text-red-500 hover:cursor-pointer">
+        <RouterLink to="/dashboard/home" >Simple Template</RouterLink>
+      </li>
+      <li class="hover:text-red-500 hover:cursor-pointer">
+        <RouterLink to="/dashboard/coupon-template" >Cupon Template</RouterLink>
+      </li>
+    </ul>
+
     <button
       type="button"
       class="border border-red-500 text-red-500 p-2 rounded-sm hover:bg-red-500 hover:text-white"
@@ -19,7 +28,7 @@
 
 <script lang="ts" setup>
 import { useAuthStore } from '@/modules/auth/stores/auth.store'
-import { useRouter } from 'vue-router'
+import { useRouter, RouterView } from 'vue-router';
 
 const router = useRouter()
 const authStore = useAuthStore()
